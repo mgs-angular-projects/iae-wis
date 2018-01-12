@@ -143,7 +143,7 @@ public class WisStudent {
 	 */
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
-		setDobInLong(dateOfBirth == null ? 0 : dateOfBirth.getTime());
+		setDobInLong(dateOfBirth == null ? null : dateOfBirth.getTime());
 	}
 
 	/**

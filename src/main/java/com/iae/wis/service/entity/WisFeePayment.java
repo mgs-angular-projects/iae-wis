@@ -229,7 +229,7 @@ public class WisFeePayment {
 	 */
 	public void setLastPaymentDate(Date lastPaymentDate) {
 		this.lastPaymentDate = lastPaymentDate;
-		setLastPaymentDateInLong(lastPaymentDate == null ? 0 : lastPaymentDate.getTime());
+		setLastPaymentDateInLong(lastPaymentDate == null ? null : lastPaymentDate.getTime());
 	}
 
 	public Long getLastPaymentDateInLong() {
