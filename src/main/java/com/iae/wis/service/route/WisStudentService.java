@@ -30,7 +30,7 @@ public class WisStudentService extends RouteBuilder {
 		restConfiguration().component("restlet").host(host).port(port).bindingMode(RestBindingMode.auto).enableCORS(true)
 				.corsHeaderProperty(WisConstant.ALLOW_HEADERS, WisConstant.ALLOW_HEADER_VALUE).corsHeaderProperty(WisConstant.ALLOW_ORIGIN, "*");
 
-		rest("/iaewis").get("/students").produces("application/json").route().routeId("getStudent").to("direct:getStudents");
+		rest("/iaewis").get("/students").produces(WisConstant.APPLICATION_JSON).route().routeId("getStudent").to("direct:getStudents");
 
 		from("direct:getStudents").routeId("getStudentsRoute").log("Received request to retrive all students").bean("wisJdbcRepository", "getStudents()");
 
