@@ -31,12 +31,15 @@ public class WisFeeService extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 
-		restConfiguration().component("restlet").host(host).port(port).bindingMode(RestBindingMode.auto);
+		restConfiguration().component("restlet").host(host).port(port).bindingMode(RestBindingMode.auto).enableCORS(true)
+				.corsHeaderProperty("Access-Control-Allow-Headers",
+						"Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers")
+				.corsHeaderProperty("Access-Control-Allow-Origin", "*");
 
 		rest("/iaewis").get("/getfeepayments").produces("application/json").route().routeId("getfeepaymentsRestletRoute").to("direct:getFeePayments");
 
 		from("direct:getFeePayments").routeId("getFeePaymentsRoute").log("Received request to retrive students who paid fees")
-				.bean("wisJdbcRepository", "getFeePayments()").marshal().json(JsonLibrary.Jackson);
+				.bean("wisJdbcRepository", "getFeePayments()");
 
 	}
 

@@ -42,7 +42,7 @@ public class WisJdbcRepository {
 
 		if (testMode) {
 			wisStudentList = new ArrayList<>();
-			for (int i = 0; i < 11; i++) {
+			for (int i = 0; i < 21; i++) {
 				wisStudentList.add(getStudent(i + ""));
 			}
 			return wisStudentList;
@@ -55,7 +55,7 @@ public class WisJdbcRepository {
 
 		if (testMode) {
 			List<WisFeePayment> feePayments = new ArrayList<>();
-			for (int i = 0; i < 11; i++) {
+			for (int i = 0; i < 21; i++) {
 				feePayments.add(getFeePayment(i + ""));
 			}
 			return feePayments;
