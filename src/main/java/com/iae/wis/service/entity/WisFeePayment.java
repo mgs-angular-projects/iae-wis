@@ -19,6 +19,7 @@ public class WisFeePayment {
 	private String feeStatus;
 	private BigDecimal totalBooksAmountPaid;
 	private Date lastPaymentDate;
+	private Long lastPaymentDateInLong;
 
 	/**
 	 * @return the fatherID
@@ -228,6 +229,15 @@ public class WisFeePayment {
 	 */
 	public void setLastPaymentDate(Date lastPaymentDate) {
 		this.lastPaymentDate = lastPaymentDate;
+		setLastPaymentDateInLong(lastPaymentDate == null ? 0 : lastPaymentDate.getTime());
+	}
+
+	public Long getLastPaymentDateInLong() {
+		return lastPaymentDateInLong;
+	}
+
+	public void setLastPaymentDateInLong(Long lastPaymentDateInLong) {
+		this.lastPaymentDateInLong = lastPaymentDateInLong;
 	}
 
 }

@@ -36,10 +36,26 @@ public class WisFeeService extends RouteBuilder {
 						"Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers")
 				.corsHeaderProperty("Access-Control-Allow-Origin", "*");
 
+		/** getFeePaymentsRoute */
+
 		rest("/iaewis").get("/getfeepayments").produces("application/json").route().routeId("getfeepaymentsRestletRoute").to("direct:getFeePayments");
 
-		from("direct:getFeePayments").routeId("getFeePaymentsRoute").log("Received request to retrive students who paid fees")
-				.bean("wisJdbcRepository", "getFeePayments()");
+		from("direct:getFeePayments").routeId("getFeePaymentsRoute").log("Received request to retrive students who paid fees").bean("wisJdbcRepository",
+				"getFeePayments()");
+
+		/** getTotalFeesRoute */
+
+		rest("/iaewis").get("/gettotalfees").produces("application/json").route().routeId("gettotalfeesRestletRoute").to("direct:getTotalFees");
+
+		from("direct:getTotalFees").routeId("getTotalFeesRoute").log("Received request to retrive tootal fees").bean("wisJdbcRepository", "getTotalFees()");
+
+		/** getTotalBookAmountRoute */
+
+		rest("/iaewis").get("/gettotalbookamount").produces("application/json").route().routeId("gettotalbookamountRestletRoute")
+				.to("direct:getTotalBookAmount");
+
+		from("direct:getTotalBookAmount").routeId("getTotalBookAmountRoute").log("Received request to retrive total book amount").bean("wisJdbcRepository",
+				"getTotalBookAmount()");
 
 	}
 

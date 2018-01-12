@@ -32,6 +32,12 @@ public class WisJdbcRepository {
 	@Value("${query.payments.list}")
 	private String paymentsQuery;
 
+	@Value("${query.total.fees}")
+	private String totalFeesQuery;
+
+	@Value("${query.total.bookamt}")
+	private String totalBookAmtQuery;
+
 	@Value("${wis.test.mode}")
 	private boolean testMode;
 
@@ -61,6 +67,22 @@ public class WisJdbcRepository {
 			return feePayments;
 		} else {
 			return jdbcTemplate.query(paymentsQuery, new BeanPropertyRowMapper<WisFeePayment>(WisFeePayment.class));
+		}
+	}
+
+	public BigDecimal getTotalFees() {
+		if (testMode) {
+			return BigDecimal.valueOf(99.99f);
+		} else {
+			return jdbcTemplate.queryForObject(totalFeesQuery, BigDecimal.class);
+		}
+	}
+
+	public BigDecimal getTotalBookAmount() {
+		if (testMode) {
+			return BigDecimal.valueOf(999.99f);
+		} else {
+			return jdbcTemplate.queryForObject(totalBookAmtQuery, BigDecimal.class);
 		}
 	}
 

@@ -3,7 +3,7 @@ package com.iae.wis.service.entity;
 import java.sql.Date;
 
 public class WisStudent {
-	
+
 	private int objid;
 	private String studentFirstName;
 	private String studentMiddleName;
@@ -12,6 +12,7 @@ public class WisStudent {
 	private String iClassLevel;
 	private String qClassLevel;
 	private Date dateOfBirth;
+	private Long dobInLong;
 	private String fID;
 	private String fatherFirstName;
 	private String fatherMiddleName;
@@ -142,6 +143,7 @@ public class WisStudent {
 	 */
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+		setDobInLong(dateOfBirth == null ? 0 : dateOfBirth.getTime());
 	}
 
 	/**
@@ -307,6 +309,14 @@ public class WisStudent {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Long getDobInLong() {
+		return dobInLong;
+	}
+
+	public void setDobInLong(Long dobInLong) {
+		this.dobInLong = dobInLong;
 	}
 
 }
