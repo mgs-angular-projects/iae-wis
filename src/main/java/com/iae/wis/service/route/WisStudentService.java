@@ -1,15 +1,15 @@
 /**
+ * Package contains the service provider
  * 
- */
+ * */
 package com.iae.wis.service.route;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestBindingMode;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.iae.wis.service.dao.WisJdbcRepository;
+import com.iae.wis.service.constant.WisConstant;
 
 /**
  * @author
@@ -17,9 +17,6 @@ import com.iae.wis.service.dao.WisJdbcRepository;
  */
 @Component
 public class WisStudentService extends RouteBuilder {
-
-	@Autowired
-	private WisJdbcRepository wisJdbcRepository;
 
 	@Value("${wis.service.host}")
 	private String host;
@@ -31,9 +28,7 @@ public class WisStudentService extends RouteBuilder {
 	public void configure() throws Exception {
 
 		restConfiguration().component("restlet").host(host).port(port).bindingMode(RestBindingMode.auto).enableCORS(true)
-				.corsHeaderProperty("Access-Control-Allow-Headers",
-						"Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers")
-				.corsHeaderProperty("Access-Control-Allow-Origin", "*");
+				.corsHeaderProperty(WisConstant.ALLOW_HEADERS, WisConstant.ALLOW_HEADER_VALUE).corsHeaderProperty(WisConstant.ALLOW_ORIGIN, "*");
 
 		rest("/iaewis").get("/students").produces("application/json").route().routeId("getStudent").to("direct:getStudents");
 
